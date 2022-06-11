@@ -3,46 +3,51 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package GGV;
-import java.sql.*;
+
 /**
  *
  * @author TrungKien
  */
-public class XLGV {
-    public Connection getCon(){
-        Connection conn = null;
-        
-        try{
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dlgv2","root","");
-        } 
-        catch (Exception ex){
-            ex.printStackTrace();
-        }
-        return conn;
+public class Giangvien extends Person {
+    private String donvi;
+    private int soCT;
+
+    public Giangvien() {
+    }
+
+    public Giangvien(String donvi, int soCT) {
+        this.donvi = donvi;
+        this.soCT = soCT;
+    }
+
+    public Giangvien(String donvi, int soCT, int maDD, String hoten, String gioitinh) {
+        super(maDD, hoten, gioitinh);
+        this.donvi = donvi;
+        this.soCT = soCT;
+    }
+
+    public String getDonvi() {
+        return donvi;
+    }
+
+    public int getSoCT() {
+        return soCT;
+    }
+
+    public void setDonvi(String donvi) {
+        this.donvi = donvi;
+    }
+
+    public void setSoCT(int soCT) {
+        this.soCT = soCT;
     }
     
-    public void getGV(String Donvi, int SoCT){
-        Connection conn = getCon();
-        
-        String query = "Select * from tbgiangvien2 where Donvi = '" + Donvi + "' and Soct = '" + SoCT + "'";
-        
-        try {
-            Statement stm = conn.createStatement();
-            ResultSet rs = stm.executeQuery(query);
-        
-            while(rs.next()){
-                int maDD = rs.getInt("MaDD");
-                String hoten = rs.getString("Hoten");
-                String gioiTInh = rs.getString("GioiTinh");
-                String donVi = rs.getString("Donvi");
-                int soCT = rs.getInt("soCT");
-                
-                System.out.println(maDD + "\t" + hoten + "\t" + gioiTInh + "\t" + donVi + "\t" +soCT);
-            
-            }
-        }
-        catch (Exception ex) {
-                    System.out.println(ex);
-                }
+    public String xetthuong(){
+        if (this.soCT > 10){
+            return "xet thuong";
+        } else {
+            return null;
         }
     }
+    
+}
